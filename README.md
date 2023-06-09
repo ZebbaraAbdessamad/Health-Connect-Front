@@ -4,7 +4,7 @@
 
 Health Connect is a revolutionary mobile app developed with Flutter that aims to transform the way patients connect with doctors. Our platform leverages the power of technology to provide a seamless experience for patients to find specialized doctors based on their specific diseases and make appointments with ease.
 
-![App Screenshots](assets/images/logo.png)
+![App Screenshots](assets/images/logo.png){:width="200px"}
 
 ## Features
 
