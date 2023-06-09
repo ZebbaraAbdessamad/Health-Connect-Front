@@ -16,19 +16,25 @@ Health Connect is a revolutionary mobile app developed with Flutter that aims to
 
 ## Screenshots
 
-![Screenshot: All Doctors](images-review/all doctors.PNG)
-![Screenshot: Appointments](images-review/appointement.PNG)
-![Screenshot: Confirm Appointment](images-review/confirm appointment.PNG)
-![Screenshot: Confirmed](images-review/confirmed.PNG)
-![Screenshot: Detail](images-review/detaill.PNG)
-![Screenshot: Doctors by Category](images-review/doctor by category.PNG)
-![Screenshot: Drawer](images-review/drawer.PNG)
-![Screenshot: Home Page](images-review/home page.PNG)
-![Screenshot: Login](images-review/login.PNG)
-![Screenshot: Padding](images-review/pandding.PNG)
-![Screenshot: Profile](images-review/profile.PNG)
-![Screenshot: Register](images-review/register.PNG)
-![Screenshot: Splash](images-review/splash.PNG)
+<div align="center">
+  <img src="/images-review/all%20doctors.PNG" alt="All Doctors" width="200" />
+  <img src="/images-review/appointement.PNG" alt="Appointments" width="200" />
+  <img src="/images-review/confirm%20appointment.PNG" alt="Confirm Appointment" width="200" />
+  <br/>
+  <img src="/images-review/confirmed.PNG" alt="Confirmed" width="200" />
+  <img src="/images-review/detaill.PNG" alt="Detail" width="200" />
+  <img src="/images-review/doctor%20by%20category.PNG" alt="Doctors by Category" width="200" />
+  <br/>
+  <img src="/images-review/drawer.PNG" alt="Drawer" width="200" />
+  <img src="/images-review/home%20page.PNG" alt="Home Page" width="200" />
+  <img src="/images-review/login.PNG" alt="Login" width="200" />
+  <br/>
+  <img src="/images-review/pandding.PNG" alt="Padding" width="200" />
+  <img src="/images-review/profile.PNG" alt="Profile" width="200" />
+  <img src="/images-review/register.PNG" alt="Register" width="200" />
+  <br/>
+  <img src="/images-review/splash.PNG" alt="Splash" width="200" />
+</div>
 
 ## Installation
 
