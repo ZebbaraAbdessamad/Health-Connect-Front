@@ -16,19 +16,19 @@ Health Connect is a revolutionary mobile app developed with Flutter that aims to
 
 ## Screenshots
 
-![Screenshot 1](/images-review/screenshot1.png)
-![Screenshot 2](/images-review/screenshot2.png)
-![Screenshot 3](/images-review/screenshot3.png)
-![Screenshot 4](/images-review/screenshot4.png)
-![Screenshot 5](/images-review/screenshot5.png)
-![Screenshot 6](/images-review/screenshot6.png)
-![Screenshot 7](/images-review/screenshot7.png)
-![Screenshot 8](/images-review/screenshot8.png)
-![Screenshot 9](/images-review/screenshot9.png)
-![Screenshot 10](/images-review/screenshot10.png)
-![Screenshot 11](/images-review/screenshot11.png)
-![Screenshot 12](/images-review/screenshot12.png)
-![Screenshot 13](/images-review/screenshot13.png)
+![Screenshot: All Doctors](images-review/all doctors.PNG)
+![Screenshot: Appointments](images-review/appointement.PNG)
+![Screenshot: Confirm Appointment](images-review/confirm appointment.PNG)
+![Screenshot: Confirmed](images-review/confirmed.PNG)
+![Screenshot: Detail](images-review/detaill.PNG)
+![Screenshot: Doctors by Category](images-review/doctor by category.PNG)
+![Screenshot: Drawer](images-review/drawer.PNG)
+![Screenshot: Home Page](images-review/home page.PNG)
+![Screenshot: Login](images-review/login.PNG)
+![Screenshot: Padding](images-review/pandding.PNG)
+![Screenshot: Profile](images-review/profile.PNG)
+![Screenshot: Register](images-review/register.PNG)
+![Screenshot: Splash](images-review/splash.PNG)
 
 ## Installation
 
