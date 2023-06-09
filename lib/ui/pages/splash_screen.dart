@@ -63,9 +63,9 @@ class _SplashPageState extends State<SplashScreen> {
                 child: SizedBox(),
               ),
               Image.asset(
-                "assets/images/heartbeat.png",
+                "assets/images/logo2.png",
                 color: Colors.white,
-                height: 100,
+                height: 200,
               ),
               Text(
                 "Health Connect",

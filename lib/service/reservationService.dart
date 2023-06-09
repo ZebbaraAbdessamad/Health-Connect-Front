@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../model/reservation .dart';
+import '../model/reservation.dart';
 import '../config/global.params.dart';
 import '../model/token_manager.dart';
 
@@ -43,7 +43,7 @@ class ReservationService {
 
   Future<List<Reservation>> getReservationsByDoctor(String doctorId) async {
     final url =
-        '$api_url/reservations/filtredByDoctor/$doctorId';
+        '$api_url/reservations/filteredByDoctor/$doctorId';
     final response = await http.get(
         Uri.parse(url),
         headers: {
@@ -53,7 +53,7 @@ class ReservationService {
     );
 
     if (response.statusCode == 200) {
-      print('Reservation liste body: ${response.body}');
+     // print('Reservation liste body: ${response.body}');
       final List<dynamic> jsonReservations = json.decode(response.body);
       final List<Reservation> reservations = jsonReservations.map((jsonReservation) => Reservation.fromJson(jsonReservation)).toList();
       return reservations;
@@ -65,7 +65,7 @@ class ReservationService {
 
   //...............
   static Future<Reservation> confirmReservation(String doctorId, String reservationId) async {
-    final url = '$api_url/reservations/$doctorId/$reservationId/confirm';
+    final url = '$api_url/reservations/confirm/$doctorId/$reservationId';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${TokenManager.accessToken}',

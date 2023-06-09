@@ -35,11 +35,11 @@ class Reservation {
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
       id: json['id'],
-      doctor: Doctor.fromJson(json['doctor']),
-      patient: Patient.fromJson(json['patient']),
-      appointmentDate: json['appointmentDate'],
-      reservationDate: json['reservationDate'],
-      comment: json['comment'],
+      doctor: Doctor.fromJson(json['doctorDTO']),
+      patient:  Patient.fromJson(json['patientDTO']),
+      appointmentDate: json["appointmentDate"] == null ? null : json['appointmentDate'],
+      reservationDate:  json["reservationDate"] == null ? null : json['reservationDate'],
+      comment:  json["comment"] == null ? null : json['comment'],
       confirmed: json['confirmed'],
     );
   }

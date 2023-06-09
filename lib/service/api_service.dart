@@ -11,6 +11,7 @@ class ApiService {
 
 
   static Future<dynamic> getUser() async {
+
     String? token = TokenManager.accessToken;
     if (token == null) {
       return null; // Handle the case where token is null
@@ -43,7 +44,6 @@ class ApiService {
  static String getEmailFromToken(String token) {
    Map<String, dynamic> decodedToken = Jwt.parseJwt(token);
    String email = decodedToken['sub'];
-   print('ààààààààààààààààààààààààààààààààààààààààààààà$email');
    return email;
  }
 }

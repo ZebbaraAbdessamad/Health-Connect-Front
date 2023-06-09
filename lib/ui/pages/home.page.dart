@@ -7,7 +7,7 @@ import 'package:health_connect/theme/light_color.dart';
 import 'package:health_connect/theme/random_color.dart';
 
 import 'package:health_connect/ui/widgets/bottom_navigation_bar.widget.dart';
-import 'package:health_connect/ui/widgets/doctors/header.widget.dart';
+import 'package:health_connect/ui/widgets/header.widget.dart';
 import '../../model/doctor.dart';
 import '../../service/doctor_service.dart';
 import '../widgets/my-drawer.widget.dart';
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                   '${doctor.firstname}',
                                   '${doctor.speciality}',
                                   '${doctor.image}',
-                                    doctor.rating ?? 2,
+                                    doctor.rating ?? 0,
                                   '${doctor.email}',
                                   '${doctor.comment}',
                                   '${doctor.phone}',
@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: <Widget>[
                     RatingBar.builder(
-                      initialRating: 3,
+                      initialRating: (rating/100)*4+1,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,

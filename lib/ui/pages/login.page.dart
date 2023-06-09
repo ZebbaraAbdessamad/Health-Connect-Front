@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_connect/theme/light_color.dart';
 
+import '../../enum/role.dart';
 import '../../service/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   late String _password;
   bool isPasswordVisible = true;
   String? _errorMessage;
-  String _selectedRole = 'User'; // Default role is User
+  Role _selectedRole = Role.USER; // Default role is User
 
   final AuthService _authService = AuthService();
 
@@ -106,28 +107,25 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                       SizedBox(height: 20.0),
-                      DropdownButtonFormField<String>(
+                      DropdownButtonFormField<Role>(
                         value: _selectedRole,
-                        decoration: InputDecoration(
-                          labelText: 'Role',
-                          prefixIcon: Icon(Icons.person),
-                        ),
-                        items: [
-                          DropdownMenuItem<String>(
-                            value: 'USER',
-                            child: Text('User'),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: 'Doctor',
-                            child: Text('Doctor'),
-                          ),
-                        ],
-                        onChanged: (value) {
+                        items: Role.values.map((Role role) {
+                          return DropdownMenuItem<Role>(
+                            value: role,
+                            child: Text(role.name.toString()),
+                          );
+                        }).toList(),
+                        onChanged: (Role? value) {
                           setState(() {
-                            _selectedRole = value!;
+                            _selectedRole = value! ;
                           });
                         },
+                        decoration: InputDecoration(
+                          labelText: 'Role',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
+
                       SizedBox(height: 20.0),
                       if (_errorMessage != null)
                         Text(

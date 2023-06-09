@@ -5,7 +5,6 @@ class Doctor {
   final String ? firstname;
   final String ? lastname;
   final String ? email;
- // final Category category;
   final String ?  speciality;
   final String ? comment;
   final double ? rating;
@@ -33,7 +32,6 @@ class Doctor {
       firstname: json["firstname"] == null ? null :json['firstname'],
       lastname: json["lastname"] == null ? null :json['lastname'],
       email:json["email"] == null ? null : json['email'],
-     // category: Category.fromJson(json['category']),
       comment: json["comment"] == null ? null : json['comment'],
       speciality: json["speciality"] == null ? null : json['speciality'],
       rating: json["rating"] == null ? null : (json['rating'] as num?)?.toDouble(),

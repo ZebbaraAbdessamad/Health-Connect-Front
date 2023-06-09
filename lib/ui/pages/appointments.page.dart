@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:health_connect/service/reservationService.dart';
 import 'package:health_connect/theme/extention.dart';
-import 'package:health_connect/ui/widgets/doctors/header.widget.dart';
+import 'package:health_connect/ui/widgets/header.widget.dart';
+import 'package:health_connect/ui/widgets/search.widget.dart';
 
-import '../../model/reservation .dart';
+import '../../config/global.params.dart';
+import '../../model/doctor.dart';
+import '../../model/reservation.dart';
 import '../../theme/light_color.dart';
 import '../widgets/bottom_navigation_bar.widget.dart';
 
@@ -18,20 +21,41 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
   late String query;
 
   void _search(String query) async {}
+
   List<Reservation> reservations = [];
+  Doctor? doctor;
 
   @override
   void initState() {
     super.initState();
+    _initializeData();
   }
 
-  Future<List<Reservation>> _fetchReservations() async {
-    print("Fetching reservations...");
-    List<Reservation> fetchedReservations =
-    await ReservationService().getReservationsByDoctor("64693c015d856c471bfc2d9b");
-    print("==========================>$fetchedReservations");
-      reservations = fetchedReservations;
-    return reservations;
+  Future<void> _initializeData() async {
+    dynamic user = await GlobalParams.fetchUser();
+    if (user is Doctor) {
+      setState(() {
+        doctor = user;
+      });
+      _fetchReservations(); // Call _fetchReservations() only once during initialization
+    }
+  }
+
+  Future<void> _fetchReservations() async {
+    try {
+      if (doctor == null) {
+        return; // Handle the case where doctor is null
+      }
+      print("Fetching reservations...${doctor!.id}");
+      List<Reservation> fetchedReservations =
+      await ReservationService().getReservationsByDoctor(doctor!.id ?? '');
+      print("==========================>$fetchedReservations");
+      setState(() {
+        reservations = fetchedReservations;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   void updateReservationStatus(Reservation reservation) {
@@ -40,11 +64,13 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
     });
 
     // Call the confirmReservation method from the ReservationService
-    ReservationService.confirmReservation(reservation.doctor.id!, reservation.id!)
+    ReservationService.confirmReservation(
+        reservation.doctor.id!, reservation.id!)
         .then((updatedReservation) {
       setState(() {
         // Update the reservation in the list
-        int index = reservations.indexWhere((r) => r.id == updatedReservation.id);
+        int index = reservations.indexWhere((r) =>
+        r.id == updatedReservation.id);
         if (index != -1) {
           reservations[index] = updatedReservation;
         }
@@ -54,6 +80,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
       print('Failed to update reservation status: $error');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,39 +90,32 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Search(),
+                SearchField( onSearch: (value) {
+                  setState(() {
+                    query = value;
+                    _search(query);
+                  });
+                }, ),
               ],
             ),
           ),
           SliverFillRemaining(
-            child: FutureBuilder<List<Reservation>>(
-              future: _fetchReservations(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final reservations = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: reservations.length,
-                    itemBuilder: (context, index) {
-                      Reservation reservation = reservations[index];
-                      return AppointmentCard(
-                        doctorName: reservation.patient.firstname!,
-                        appointmentDate: reservation.appointmentDate!,
-                        reservationDate: reservation.reservationDate!,
-                        comment: reservation.comment!,
-                        confirmed: reservation.confirmed,
-                        onPressed: () {
-                          updateReservationStatus(reservation);
-                        },
-                      ).vP4;
-                    },
-                  ).p(20);
-                } else if (snapshot.hasError) {
-                  return Text("Error: ${snapshot.error}");
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
+            child: ListView.builder(
+              itemCount: reservations.length,
+              itemBuilder: (context, index) {
+                Reservation reservation = reservations[index];
+                return AppointmentCard(
+                  doctorName: reservation.patient.firstname!,
+                  appointmentDate: reservation.appointmentDate!,
+                  reservationDate: reservation.reservationDate!,
+                  comment: reservation.comment!,
+                  confirmed: reservation.confirmed,
+                  onPressed: () {
+                    updateReservationStatus(reservation);
+                  },
+                ).vP4;
               },
-            ),
+            ).p(20),
           ),
         ],
       ),
@@ -103,7 +123,6 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
     );
   }
 }
-
 class AppointmentCard extends StatelessWidget {
   final String doctorName;
   final String appointmentDate;
@@ -120,9 +139,9 @@ class AppointmentCard extends StatelessWidget {
     required this.confirmed,
     required this.onPressed,
   });
+
   @override
   Widget build(BuildContext context) {
-    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^$appointmentDate');
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -136,8 +155,38 @@ class AppointmentCard extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        title: Text(doctorName),
-        subtitle: Text('$appointmentDate'),
+        title: Text(
+          doctorName,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              appointmentDate,
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(height: 8),
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                'Comment: $comment',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
         trailing: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -154,43 +203,7 @@ class AppointmentCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Search extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 55,
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(13)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.grey.withOpacity(.2),
-            blurRadius: 12,
-            offset: Offset(5, 5),
-          )
-        ],
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          border: InputBorder.none,
-          hintText: "Search",
-          hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
-          suffixIcon: IconButton(
-            onPressed: () {
-              // Perform search
-            },
-            icon: Icon(Icons.search, color: Colors.blue),
-          ),
-        ),
-      ),
+      ).p(4),
     );
   }
 }

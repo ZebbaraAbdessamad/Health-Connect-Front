@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
-import 'package:health_connect/ui/pages/all_doctors.page.dart';
-import 'package:health_connect/ui/pages/home.page.dart';
-import 'package:health_connect/ui/pages/profile.page.dart';
 
 import '../../theme/light_color.dart';
 
@@ -33,7 +30,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       },
       elevation: 0,
       backgroundColor: LightColor.background,
-      selectedItemColor: LightColor.lightGreen,
+      selectedItemColor: LightColor.grey,
       unselectedItemColor: LightColor.grey,
       selectedLabelStyle: TextStyle(
         fontWeight: FontWeight.bold,
@@ -55,7 +52,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             child: Icon(
               Icons.home,
               size: 28.0,
-              color: _currentIndex == 0 ? LightColor.lightGreen : LightColor.grey,
+              color: _currentIndex == 0 ? LightColor.grey : LightColor.grey,
             ),
           ),
           label: 'Home',

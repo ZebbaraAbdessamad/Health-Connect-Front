@@ -6,6 +6,7 @@ import 'package:health_connect/ui/pages/medical_records .page.dart';
 import 'package:health_connect/ui/pages/home.page.dart';
 import 'package:health_connect/ui/pages/login.page.dart';
 import 'package:flutter/material.dart';
+import 'package:health_connect/ui/pages/patient_reservation.dart';
 import 'package:health_connect/ui/pages/profile.page.dart';
 import 'package:health_connect/ui/pages/registration.page.dart';
 import 'package:health_connect/ui/pages/splash_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "/all-doctors":(context) => TokenManager.accessToken != null ? allDoctorsPage() : LoginPage(),
         "/doctor-detaills":(context) => TokenManager.accessToken != null ? DoctorDetailsPage() : LoginPage(),
         "/profile":(context) => TokenManager.accessToken != null ? ProfilePage() : LoginPage(),
+        "/patient-appointment":(context) => TokenManager.accessToken != null ? PatientAppointmentPage(): LoginPage(),
 
       },
       theme: ThemeData (

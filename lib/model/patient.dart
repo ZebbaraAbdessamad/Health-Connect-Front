@@ -1,13 +1,15 @@
 class Patient {
-  final String? id;
-  final String firstname;
-  final String email;
-  final String? phone;
-  final String image;
+  final String ? id;
+  final String ? firstname;
+  final String ? lastname;
+  final String ? email;
+  final String ? phone;
+  final String ? image;
 
   Patient({
     required this.id,
     required this.firstname,
+    required this.lastname,
     required this.email,
     required this.phone,
     required this.image,
@@ -17,9 +19,10 @@ class Patient {
     return Patient(
       id: json['id'],
       firstname: json['firstname'],
+      lastname : json['lastname'],
       email: json['email'],
       phone: json['phone'],
-      image: json['image'] as String, // Handle null value by using 'as String?'
+      image:json["image"] == null ? null :json['image'], // Handle null value by using 'as String?'
     );
   }
 
@@ -27,6 +30,7 @@ class Patient {
     return {
       'id': id,
       'firstname': firstname,
+      'lastname' : lastname,
       'email': email,
       'phone': phone,
       'image': image,

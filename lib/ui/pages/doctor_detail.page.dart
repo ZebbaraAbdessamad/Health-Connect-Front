@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:health_connect/config/global.params.dart';
+import 'package:health_connect/service/rating_service.dart';
 import 'package:health_connect/theme/light_color.dart';
 import 'package:health_connect/theme/text_styles.dart';
 import 'package:health_connect/theme/theme.dart';
 import 'package:health_connect/theme/extention.dart';
-import 'package:health_connect/ui/widgets/doctors/header.widget.dart';
+import 'package:health_connect/ui/widgets/header.widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../model/doctor.dart';
 import '../../model/patient.dart';
-import '../../model/reservation .dart';
+import '../../model/reservation.dart';
 import '../../service/api_service.dart';
 import '../../service/reservationService.dart';
 import '../widgets/bottom_navigation_bar.widget.dart';
@@ -37,6 +40,7 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
   DateTime selectedDate = DateTime.now();
   String comment = '';
 
+  Patient? patient  ;
 
   dynamic user;
 
@@ -49,13 +53,15 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
   Future<void> fetchUser() async {
     print("Fetching user...........................................");
     dynamic fetchedUser = await ApiService.getUser();
-    print("==========================>$fetchedUser");
     setState(() {
       user = fetchedUser;
+      if (user is Patient) {
+          patient = user;
+      }
     });
   }
 
-
+  // select date
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -69,6 +75,9 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
     }
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
@@ -77,9 +86,24 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
     final String specialty = arguments['specialty'];
     final String image = arguments['image'];
     final String descreption = arguments['descreption'];
-    final double rating = arguments['rating'];
+    final double rating = (arguments['rating'] / 100) * 4 + 1;
     final String email = arguments['email'];
     final String tele = arguments['tele'];
+
+
+    // add review
+    void addReview(double rating) async {
+
+      String patientId = patient?.id ?? ''; // Replace with the actual patient ID
+
+      bool reviewAdded = await RatingService().addReviewForDoctor(doctor_id, patientId, rating);
+      if (reviewAdded) {
+        print('_____________ Review added successfully');
+      } else {
+        print('_____________ Failed to add review');
+      }
+    }
+
 
 
     TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25).bold;
@@ -151,7 +175,7 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
                                             color: Colors.amber,
                                           ),
                                           onRatingUpdate: (rating) {
-                                            print(rating);
+                                            addReview(rating);
                                           },
                                         ),
                                       ],
@@ -286,12 +310,13 @@ class _DoctorDetailsPageState extends State<DoctorDetailsPage> {
                                                         try {
                                                           DateFormat dateFormat = DateFormat('yyyy-MM-dd');
                                                           String formattedDate = dateFormat.format(selectedDate);
-                                                          Patient patient = user;
+
+                                                          print("zebbara :::::$formattedDate ,$comment $patient.id $doctor_id");
                                                           Reservation createdReservation = await ReservationService.createReservation(
                                                             formattedDate,
                                                             comment,
                                                             false,
-                                                            patient.id!,
+                                                            patient?.id ??'',
                                                             doctor_id,
                                                           );
                                                           // Handle the created reservation as needed

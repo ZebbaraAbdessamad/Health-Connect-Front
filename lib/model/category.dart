@@ -5,7 +5,6 @@ class Category {
   String ? name;
   String ?  src;
   String ?  color;
-  int?  numberOfDoctors;
   List<Doctor> doctors;
 
   Category({
@@ -13,7 +12,6 @@ class Category {
     required this.name,
     required this.src,
     required this.color,
-    required this.numberOfDoctors,
     required this.doctors,
   });
 
@@ -29,7 +27,6 @@ class Category {
       name:  json["name"] == null ? null : json['name'],
       src: json["src"] == null ? null : json['src'],
       color: json["color"] == null ? null : json['color'],
-      numberOfDoctors:  json["numberOfDoctors"] == null ? null :json['numberOfDoctors'],
       doctors: doctorsList,
     );
   }
@@ -40,7 +37,6 @@ class Category {
     data['name'] = this.name;
     data['src'] = this.src;
     data['color'] = this.color;
-    data['numberOfDoctors'] = this.numberOfDoctors;
     data['doctors'] = this.doctors.map((doctor) => doctor.toJson()).toList();
     return data;
   }

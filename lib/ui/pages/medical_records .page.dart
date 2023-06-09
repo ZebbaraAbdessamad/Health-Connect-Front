@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../theme/light_color.dart';
 import '../widgets/bottom_navigation_bar.widget.dart';
-import '../widgets/doctors/header.widget.dart';
+import '../widgets/header.widget.dart';
 
 class MedicalRecordsPage extends StatelessWidget {
   @override

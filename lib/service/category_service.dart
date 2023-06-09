@@ -7,6 +7,7 @@ import '../model/token_manager.dart';
 class CategoryService {
 
   Future<List<Category>> getCategories() async {
+
     final response = await http.get(
       Uri.parse('$api_url/categories'),
       headers: {
@@ -16,7 +17,7 @@ class CategoryService {
     );
     print(TokenManager.accessToken);
     if (response.statusCode == 200) {
-      print('Response body: ${response.body}');
+      print('----------Category body: ${response.body}');
       final List<dynamic> jsonList = json.decode(response.body);
       final List<Category> categories = jsonList.map((json) => Category.fromJson(json)).toList();
       return categories;

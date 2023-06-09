@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:health_connect/service/category_service.dart';
 import 'package:health_connect/theme/extention.dart';
 import 'package:health_connect/theme/random_color.dart';
-import 'package:health_connect/ui/widgets/doctors/header.widget.dart';
+import 'package:health_connect/ui/widgets/header.widget.dart';
 
 import '../../model/category.dart';
 import '../../model/doctor.dart';
@@ -13,7 +13,7 @@ import '../../service/doctor_service.dart';
 import '../../theme/light_color.dart';
 import '../../theme/text_styles.dart';
 import '../widgets/bottom_navigation_bar.widget.dart';
-import '../widgets/doctors/search.widget.dart';
+import '../widgets/search.widget.dart';
 import '../widgets/progress_indicator.widget.dart';
 
 class allDoctorsPage extends StatefulWidget {
@@ -171,7 +171,7 @@ Widget build(BuildContext context) {
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 RatingBar.builder(
-                                  initialRating: 3,
+                                  initialRating: ((doctor.rating ?? 0.0)/100)*4+1,
                                   minRating: 1,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
