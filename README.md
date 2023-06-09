@@ -17,23 +17,21 @@ Health Connect is a revolutionary mobile app developed with Flutter that aims to
 ## Screenshots
 
 <div align="center">
-  <img src="/images-review/all%20doctors.PNG" alt="All Doctors" width="200" />
-  <img src="/images-review/appointement.PNG" alt="Appointments" width="200" />
-  <img src="/images-review/confirm%20appointment.PNG" alt="Confirm Appointment" width="200" />
+  <img src="/images-review/all%20doctors.PNG" alt="All Doctors" width="160" />
+  <img src="/images-review/appointement.PNG" alt="Appointments" width="160" />
+  <img src="/images-review/confirm%20appointment.PNG" alt="Confirm Appointment" width="160" />
+  <img src="/images-review/confirmed.PNG" alt="Confirmed" width="160" />
+  <img src="/images-review/detaill.PNG" alt="Detail" width="160" />
   <br/>
-  <img src="/images-review/confirmed.PNG" alt="Confirmed" width="200" />
-  <img src="/images-review/detaill.PNG" alt="Detail" width="200" />
-  <img src="/images-review/doctor%20by%20category.PNG" alt="Doctors by Category" width="200" />
+  <img src="/images-review/doctor%20by%20category.PNG" alt="Doctors by Category" width="160" />
+  <img src="/images-review/drawer.PNG" alt="Drawer" width="160" />
+  <img src="/images-review/home%20page.PNG" alt="Home Page" width="160" />
+  <img src="/images-review/login.PNG" alt="Login" width="160" />
+  <img src="/images-review/pandding.PNG" alt="Padding" width="160" />
   <br/>
-  <img src="/images-review/drawer.PNG" alt="Drawer" width="200" />
-  <img src="/images-review/home%20page.PNG" alt="Home Page" width="200" />
-  <img src="/images-review/login.PNG" alt="Login" width="200" />
-  <br/>
-  <img src="/images-review/pandding.PNG" alt="Padding" width="200" />
-  <img src="/images-review/profile.PNG" alt="Profile" width="200" />
-  <img src="/images-review/register.PNG" alt="Register" width="200" />
-  <br/>
-  <img src="/images-review/splash.PNG" alt="Splash" width="200" />
+  <img src="/images-review/profile.PNG" alt="Profile" width="160" />
+  <img src="/images-review/register.PNG" alt="Register" width="160" />
+  <img src="/images-review/splash.PNG" alt="Splash" width="160" />
 </div>
 
 ## Installation
